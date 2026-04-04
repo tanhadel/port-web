@@ -16,6 +16,7 @@ interface BlogPost {
   category: string;
   image: string;
   tags: string[];
+  featured?: boolean;
 }
 
 interface BlogProps {
