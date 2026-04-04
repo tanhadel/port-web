@@ -19,6 +19,7 @@ interface BlogPost {
   featured?: boolean;
   slug?: { current: string };
   _id?: string;
+  cardImage?: string;
 }
 
 interface BlogProps {
