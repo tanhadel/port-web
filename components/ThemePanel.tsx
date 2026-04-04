@@ -40,14 +40,13 @@ export default function ThemePanel() {
     const color = colors.find(c => c.name === colorName)
     if (color) {
       console.log('Applying theme color:', colorName, color)
+      // Set CSS variables that match @theme structure
+      document.documentElement.style.setProperty('--color-primary-400', color.color)
+      document.documentElement.style.setProperty('--color-primary-500', color.dark)
+      // Also set the CSS custom properties for components
       document.documentElement.style.setProperty('--primary', color.color)
       document.documentElement.style.setProperty('--primary-dark', color.dark)
       document.documentElement.setAttribute('data-theme', colorName)
-      
-      // Force a repaint
-      document.documentElement.style.display = 'none'
-      document.documentElement.offsetHeight // Trigger reflow
-      document.documentElement.style.display = ''
     }
   }
 

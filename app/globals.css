@@ -24,37 +24,51 @@
 :root {
   --primary: #5ac24e;
   --primary-dark: #4ade80;
+  --color-primary-400: #5ac24e;
+  --color-primary-500: #4ade80;
 }
 
 /* Theme color variations - updated dynamically by ThemePanel */
 [data-theme="green"] {
   --primary: #5ac24e;
   --primary-dark: #4ade80;
+  --color-primary-400: #5ac24e;
+  --color-primary-500: #4ade80;
 }
 
 [data-theme="blue"] {
   --primary: #65b4f3;
   --primary-dark: #3b82f6;
+  --color-primary-400: #65b4f3;
+  --color-primary-500: #3b82f6;
 }
 
 [data-theme="orange"] {
   --primary: #f5a640;
   --primary-dark: #fb923c;
+  --color-primary-400: #f5a640;
+  --color-primary-500: #fb923c;
 }
 
 [data-theme="pink"] {
   --primary: #ee6192;
   --primary-dark: #ec4899;
+  --color-primary-400: #ee6192;
+  --color-primary-500: #ec4899;
 }
 
 [data-theme="purple"] {
   --primary: #bb68c8;
   --primary-dark: #a855f7;
+  --color-primary-400: #bb68c8;
+  --color-primary-500: #a855f7;
 }
 
 [data-theme="red"] {
   --primary: #ee534f;
   --primary-dark: #ef4444;
+  --color-primary-400: #ee534f;
+  --color-primary-500: #ef4444;
 }
 
 /* Dark mode transitions */
