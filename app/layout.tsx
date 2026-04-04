@@ -29,8 +29,8 @@ export default async function RootLayout({
   const profile = await client.fetch(queries.profile).catch(() => null)
   const profileWithLogo = profile ? {
     name: profile.name,
-    logo: profile.logo ? urlFor(profile.logo).width(200).url() : null,
-  } : null
+    logo: profile.logo ? urlFor(profile.logo).width(200).url() : undefined,
+  } : undefined
   return (
     <html lang="en" className="no-js" suppressHydrationWarning>
       <head>
