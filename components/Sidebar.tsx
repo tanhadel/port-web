@@ -113,8 +113,8 @@ const Sidebar: React.FC<SidebarProps> = ({ profile }) => {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-              style={{ color: 'inherit' }}
+              className="hover:scale-110 transition-transform"
+              style={{ color: 'var(--primary)' }}
               aria-label={social.label}
             >
               <span className="icon">{social.icon}</span>
