@@ -11,6 +11,7 @@ interface Experience {
   location: string;
   description: string;
   tags: string[];
+  _id?: string;
 }
 
 interface Education {
@@ -20,6 +21,7 @@ interface Education {
   period: string;
   location: string;
   description: string;
+  _id?: string;
 }
 
 interface ResumeProps {
