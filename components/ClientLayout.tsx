@@ -2,6 +2,7 @@
 
 import { useSmoothScroll, useSectionAnimation, usePageTransition } from '@/lib/hooks';
 import ThemePanel from './ThemePanel';
+import DarkModeToggle from './DarkModeToggle';
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   useSmoothScroll();
@@ -11,6 +12,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <>
       <ThemePanel />
+      <DarkModeToggle />
       {children}
     </>
   );
