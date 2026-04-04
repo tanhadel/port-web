@@ -1,26 +1,540 @@
 @import "tailwindcss";
 
+@theme {
+  /* Primary color palette - Green theme */
+  --color-primary-50: #f0fdf4;
+  --color-primary-100: #dcfce7;
+  --color-primary-200: #bbf7d0;
+  --color-primary-300: #86efac;
+  --color-primary-400: #5ac24e;
+  --color-primary-500: #4ade80;
+  --color-primary-600: #22c55e;
+  --color-primary-700: #16a34a;
+  --color-primary-800: #15803d;
+  --color-primary-900: #14532d;
+
+  /* Custom animations */
+  --animate-blob: blob 7s infinite;
+  --animate-spin-slow: spin 20s linear infinite;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-bounce-slow: bounce 2s infinite;
+  --animate-pulse-slow: pulse 3s infinite;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #5ac24e;
+  --primary-dark: #4ade80;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Theme color variations - updated dynamically by ThemePanel */
+[data-theme="green"] {
+  --primary: #5ac24e;
+  --primary-dark: #4ade80;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+[data-theme="blue"] {
+  --primary: #65b4f3;
+  --primary-dark: #3b82f6;
+}
+
+[data-theme="orange"] {
+  --primary: #f5a640;
+  --primary-dark: #fb923c;
+}
+
+[data-theme="pink"] {
+  --primary: #ee6192;
+  --primary-dark: #ec4899;
+}
+
+[data-theme="purple"] {
+  --primary: #bb68c8;
+  --primary-dark: #a855f7;
+}
+
+[data-theme="red"] {
+  --primary: #ee534f;
+  --primary-dark: #ef4444;
+}
+
+/* Dark mode transitions */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Page transition animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.page-transition-enter {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.page-transition-exit {
+  animation: fadeOut 0.3s ease-in forwards;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary), var(--primary-dark));
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--primary-dark), var(--primary));
+}
+
+/* Animations removed */
+
+/* Preloader Styles */
+.preloader {
+  background-color: #353535;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+
+.double-bounce1,
+.double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--primary);
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: sk-bounce 2s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  animation-delay: -1s;
+}
+
+@keyframes sk-bounce {
+  0%,
+  100% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+/* Lines Grid Styles */
+.lines-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.lines-grid.loaded {
+  opacity: 0.08;
+}
+
+.lines-grid .row {
+  display: flex;
+  height: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.lines-grid .col {
+  position: relative;
+  border-right: 1px solid rgba(90, 194, 78, 0.15);
+}
+
+.lines-grid .col:last-child {
+  border-right: none;
+}
+
+/* Column width classes */
+.lines-grid .col-m-12 { width: 100%; }
+.lines-grid .col-m-0 { width: 0; display: none; }
+
+@media (min-width: 768px) {
+  .lines-grid .col-t-6 { width: 50%; }
+  .lines-grid .col-t-0 { width: 0; display: none; }
+}
+
+@media (min-width: 1024px) {
+  .lines-grid .col-d-4 { width: 33.333%; }
+  .lines-grid .col-d-0 { width: 0; display: none; }
+}
+
+@media (min-width: 1200px) {
+  .lines-grid .col-d-lg-3 { width: 25%; display: block; }
+}
+
+.lines-grid .lines {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.lines-grid .line-1,
+.lines-grid .line-2 {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+  animation: line-drop 15s infinite linear;
+}
+
+.lines-grid .line-2 {
+  animation-delay: 7.5s;
+}
+
+@keyframes line-drop {
+  0% {
+    top: -100px;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+/* Utility Classes */
+.gradient-text {
+  background: linear-gradient(to right, var(--primary), var(--primary-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.section-spacing {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .section-spacing {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+/* Main Content */
+.main-content {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Smooth Transitions - Removed default opacity: 0 to prevent content flashing */
+section {
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+section.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card-based layout animations */
+.card-inner {
+  opacity: 0;
+  transform: scale(0.95) translateY(20px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-inner.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Fade in animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Stagger animations for children */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* Hero Background */
+.hero-background {
+  background-image: url('/images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Fallback gradient if image doesn't exist */
+.hero-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  z-index: -1;
+}
+
+/* Theme Panel Styles */
+.theme_panel .toggle_bts {
+  position: fixed;
+  right: 0;
+  top: 100px;
+  z-index: 51;
+}
+
+.theme_panel .toggle-theme-panel:hover i {
+  animation: spin 2s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 20s linear infinite;
+}
+
+/* Apply primary color to elements */
+:root[data-theme="green"] {
+  --primary: #5ac24e;
+}
+
+:root[data-theme="blue"] {
+  --primary: #65b4f3;
+}
+
+:root[data-theme="orange"] {
+  --primary: #f5a640;
+}
+
+:root[data-theme="pink"] {
+  --primary: #ee6192;
+}
+
+:root[data-theme="purple"] {
+  --primary: #bb68c8;
+}
+
+:root[data-theme="red"] {
+  --primary: #ee534f;
+}
+
+/* Apply primary color to various elements */
+a:hover,
+.text-primary,
+[class*="text-primary"],
+[class*="bg-primary"],
+[class*="border-primary"] {
+  color: var(--primary);
+}
+
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+
+.border-primary {
+  border-color: var(--primary) !important;
+}
+
+/* Override Tailwind green with dynamic primary color */
+.text-green-500,
+.dark .text-green-400 {
+  color: var(--primary) !important;
+}
+
+.text-green-600,
+.dark .text-green-500 {
+  color: var(--primary) !important;
+  filter: brightness(0.9);
+}
+
+.bg-green-500 {
+  background-color: var(--primary) !important;
+}
+
+.bg-green-600 {
+  background-color: var(--primary) !important;
+  filter: brightness(0.9);
+}
+
+/* Gradient overrides */
+.from-green-500,
+.from-green-600 {
+  --tw-gradient-from: var(--primary) var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+
+.to-green-500,
+.to-green-600 {
+  --tw-gradient-to: var(--primary) var(--tw-gradient-to-position) !important;
+}
+
+.border-green-500,
+.dark .border-green-400 {
+  border-color: var(--primary) !important;
+}
+
+.hover\:text-green-500:hover,
+.dark .hover\:text-green-400:hover {
+  color: var(--primary) !important;
+}
+
+.hover\:border-green-500:hover,
+.dark .hover\:border-green-400:hover {
+  border-color: var(--primary) !important;
+}
+
+/* Ensure gradients work with dynamic colors */
+.bg-gradient-to-r.from-green-500,
+.bg-gradient-to-r.from-green-600,
+.bg-gradient-to-br.from-green-500,
+.bg-gradient-to-br.from-green-600 {
+  background-image: linear-gradient(to right, var(--primary), var(--primary-dark)) !important;
+}
+
+.bg-gradient-to-r.to-green-600,
+.bg-gradient-to-r.to-green-500 {
+  background-image: linear-gradient(to right, var(--tw-gradient-from, transparent), var(--primary)) !important;
+}
+
+/* More specific overrides for all green colors */
+[class*="text-green-"],
+[class*="hover:text-green-"]:hover {
+  color: var(--primary) !important;
+}
+
+[class*="bg-green-"] {
+  background-color: var(--primary) !important;
+}
+
+[class*="border-green-"] {
+  border-color: var(--primary) !important;
+}
+
+/* Override any bg-gradient that uses green */
+[class*="from-green-"] {
+  --tw-gradient-from: var(--primary) !important;
+}
+
+[class*="to-green-"] {
+  --tw-gradient-to: var(--primary) !important;
+}
+
+/* Ultra-specific overrides to ensure theme colors work */
+html[data-theme] [class*="text-green"],
+html[data-theme] [class*="hover:text-green"]:hover,
+html[data-theme].dark [class*="dark:text-green"],
+html[data-theme].dark [class*="dark:hover:text-green"]:hover {
+  color: var(--primary) !important;
+}
+
+html[data-theme] [class*="bg-green"] {
+  background-color: var(--primary) !important;
+}
+
+html[data-theme] [class*="border-green"],
+html[data-theme] [class*="hover:border-green"]:hover,
+html[data-theme].dark [class*="dark:border-green"],
+html[data-theme].dark [class*="dark:hover:border-green"]:hover {
+  border-color: var(--primary) !important;
+}
+
+html[data-theme] [class*="from-green"] {
+  --tw-gradient-from: var(--primary) !important;
+}
+
+html[data-theme] [class*="to-green"] {
+  --tw-gradient-to: var(--primary) !important;
 }
