@@ -14,6 +14,7 @@ interface Project {
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
+  _id?: string;
 }
 
 interface PortfolioProps {
