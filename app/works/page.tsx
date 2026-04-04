@@ -13,7 +13,7 @@ export default async function WorksPage() {
     // Transform image objects to URLs
     const projectsWithImageUrls = projects.map((project: any) => ({
       ...project,
-      image: project.image ? urlFor(project.image).width(800).url() : null,
+      image: project.image ? urlFor(project.image).width(800).url() : undefined,
     }))
 
     // Get hero image from profile (use heroBackground if available, otherwise use profile image)
@@ -21,7 +21,7 @@ export default async function WorksPage() {
       ? urlFor(profile.heroBackground).width(1200).height(1600).url()
       : profile?.image 
       ? urlFor(profile.image).width(1200).height(1600).url()
-      : null
+      : undefined
 
     return <Portfolio projects={projectsWithImageUrls} heroImage={heroImage} />
   } catch (error) {
