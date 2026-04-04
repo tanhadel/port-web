@@ -26,20 +26,9 @@ export default function ThemePanel() {
   const applyThemeColor = (colorName: string) => {
     const color = colors.find(c => c.name === colorName)
     if (color) {
-<<<<<<< HEAD
       document.documentElement.style.setProperty('--primary', color.color)
       document.documentElement.style.setProperty('--primary-dark', color.dark)
       document.documentElement.setAttribute('data-theme', colorName)
-=======
-      document.documentElement.style.setProperty('--color-primary-400', color.color)
-      document.documentElement.style.setProperty('--color-primary-500', color.dark)
-      document.documentElement.style.setProperty('--primary', color.color)
-      document.documentElement.style.setProperty('--primary-dark', color.dark)
-      document.documentElement.setAttribute('data-theme', colorName)
-      
-      // Trigger a recalc
-      void document.documentElement.offsetHeight
->>>>>>> 41213e7568df680279b728c6ed0a1dd3688bdd87
     }
   }
 
@@ -64,19 +53,11 @@ export default function ThemePanel() {
       </div>
       
       <div
-<<<<<<< HEAD
         className={`theme_menu fixed top-24 right-0 bg-white shadow-2xl rounded-l-lg transition-transform ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         } w-64 p-5`}
       >
         <h4 className="text-xs font-bold mb-6 text-gray-700 tracking-wider uppercase text-center">
-=======
-        className={`theme_menu fixed top-24 right-0 bg-white dark:bg-gray-900 shadow-2xl rounded-l-lg transition-transform ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        } w-64 p-5`}
-      >
-        <h4 className="text-xs font-bold mb-6 text-gray-700 dark:text-gray-300 tracking-wider uppercase text-center">
->>>>>>> 41213e7568df680279b728c6ed0a1dd3688bdd87
           Color Switcher
         </h4>
         
@@ -98,33 +79,6 @@ export default function ThemePanel() {
             ))}
           </div>
         </div>
-<<<<<<< HEAD
-=======
-        
-        <h4 className="text-xs font-bold mb-3 text-gray-700 dark:text-gray-300 tracking-wider uppercase text-center">
-          RTL/LTR Version
-        </h4>
-        <div className="grid grid-cols-2 gap-2 mb-6">
-          <button
-            onClick={(e) => {
-              e.preventDefault()
-              document.documentElement.setAttribute('dir', 'rtl')
-            }}
-            className="py-2 px-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium hover:bg-gray-50 dark:hover:bg-gray-700"
-          >
-            RTL
-          </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault()
-              document.documentElement.setAttribute('dir', 'ltr')
-            }}
-            className="py-2 px-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium hover:bg-gray-50 dark:hover:bg-gray-700"
-          >
-            LTR
-          </button>
-        </div>
->>>>>>> 41213e7568df680279b728c6ed0a1dd3688bdd87
       </div>
     </div>
   )
