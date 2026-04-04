@@ -23,8 +23,9 @@ const pageVariants = {
 };
 
 const pageTransition = {
+  type: "tween" as const,
   duration: 0.6,
-  ease: [0.4, 0.0, 0.2, 1], // material-like smooth easing
+  ease: "easeInOut" as const,
 };
 
 export default function PageTransition({ children }: { children: ReactNode }) {
