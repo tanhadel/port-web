@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import Sidebar from '@/components/Sidebar'
 import Footer from '@/components/Footer'
-import Preloader from '@/components/Preloader'
 import LinesGrid from '@/components/LinesGrid'
 import ClientLayout from '@/components/ClientLayout'
 import { client, queries, urlFor } from '@/lib/sanity'
@@ -39,14 +38,12 @@ export default async function RootLayout({
       </head>
       <body className={poppins.className} suppressHydrationWarning>
         <StyledComponentsRegistry>
-          <Preloader />
           <ClientLayout>
             <div className="wrapper">
               <Sidebar profile={profileWithLogo} />
               <main className="main-content lg:ml-24">
                 <LinesGrid />
                   {children}
-                
                 <Footer />
               </main>
             </div>

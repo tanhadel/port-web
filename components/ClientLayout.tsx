@@ -1,18 +1,14 @@
 'use client';
 
-import { useSmoothScroll, useSectionAnimation, usePageTransition } from '@/lib/hooks';
-import ThemePanel from './ThemePanel';
+import { useSmoothScroll, usePageTransition } from '@/lib/hooks';
 import DarkModeToggle from './DarkModeToggle';
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   useSmoothScroll();
-  useSectionAnimation();
   usePageTransition();
 
   return (
     <>
-      <ThemePanel />
-      
       {children}
     </>
   );
