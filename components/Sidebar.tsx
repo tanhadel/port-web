@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
-  Home, User, Briefcase, Eye, MessageSquare, Mail,
+  Home, Briefcase, Mail,
   Github, Linkedin, Instagram, Twitter 
 } from 'lucide-react';
 
@@ -35,10 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ profile }) => {
 
   const menuItems: MenuItem[] = [
     { id: 'home', label: 'Home', icon: <Home size={20} />, href: '/' },
-    { id: 'about', label: 'About', icon: <User size={20} />, href: '/about' },
     { id: 'resume', label: 'Resume', icon: <Briefcase size={20} />, href: '/resume' },
-    { id: 'portfolio', label: 'Portfolio', icon: <Eye size={20} />, href: '/works' },
-    { id: 'blog', label: 'Blog', icon: <MessageSquare size={20} />, href: '/blog' },
     { id: 'contact', label: 'Contact', icon: <Mail size={20} />, href: '/contacts' },
   ];
 
@@ -54,14 +51,8 @@ const Sidebar: React.FC<SidebarProps> = ({ profile }) => {
     const path = pathname || '/';
     if (path === '/') {
       setActiveSection('home');
-    } else if (path.startsWith('/about')) {
-      setActiveSection('about');
     } else if (path.startsWith('/resume')) {
       setActiveSection('resume');
-    } else if (path.startsWith('/works')) {
-      setActiveSection('portfolio');
-    } else if (path.startsWith('/blog')) {
-      setActiveSection('blog');
     } else if (path.startsWith('/contacts')) {
       setActiveSection('contact');
     }
