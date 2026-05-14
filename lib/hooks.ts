@@ -30,7 +30,7 @@ export const useSmoothScroll = () => {
                 block: 'start'
               });
             }
-          } catch (error) {
+          } catch {
             // Invalid ID - ignore
             console.warn('Invalid element ID:', id);
           }
